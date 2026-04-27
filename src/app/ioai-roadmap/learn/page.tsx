@@ -8,8 +8,10 @@ import {
   Star, Layers, Zap, Trophy, Clock, ChevronRight, Brain,
   BarChart2, Search, X, Timer, Flame, StickyNote, Bookmark,
   Play, Pause, RotateCcw, TrendingUp, Calendar, Award,
-  Download, Upload, Save
+  Download, Upload, Save, LogIn, Cloud
 } from "lucide-react";
+import { saveProgress, loadProgress, signInWithGoogle, auth } from '@/lib/firebase';
+import { onAuthStateChanged, type User } from 'firebase/auth';
 
 // ── LEVEL CONFIG ─────────────────────────────────────────────────────
 const LEVELS = [
@@ -99,16 +101,11 @@ const EXTRAS: Record<LevelKey, { title: string; items: string[] }[]> = {
 };
 
 // ── POMODORO TIMER ───────────────────────────────────────────────────
-function PomodoroTimer() {
+function PomodoroTimer({ sessions, setSessions }: { sessions: number; setSessions: (n: number) => void }) {
   const [time, setTime] = useState(25 * 60);
   const [running, setRunning] = useState(false);
   const [mode, setMode] = useState<"work" | "break">("work");
-  const [sessions, setSessions] = useState(0);
   const interval = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    try { const s = localStorage.getItem("ioai_pomo_sessions"); if (s) setSessions(parseInt(s)); } catch {}
-  }, []);
 
   useEffect(() => {
     if (running && time > 0) {
@@ -122,7 +119,7 @@ function PomodoroTimer() {
       setRunning(false);
     }
     return () => { if (interval.current) clearInterval(interval.current); };
-  }, [running, time, mode, sessions]);
+  }, [running, time, mode, sessions, setSessions]);
 
   const mins = Math.floor(time / 60); const secs = time % 60;
   const pct = mode === "work" ? ((25 * 60 - time) / (25 * 60)) * 100 : ((5 * 60 - time) / (5 * 60)) * 100;
@@ -161,17 +158,10 @@ function PomodoroTimer() {
 }
 
 // ── STREAK TRACKER ───────────────────────────────────────────────────
-function StreakTracker() {
-  const [streak, setStreak] = useState(0);
-  const [lastDate, setLastDate] = useState("");
+function StreakTracker({ streak, setStreak, lastDate, setLastDate }: {
+  streak: number; setStreak: (n: number) => void; lastDate: string; setLastDate: (d: string) => void;
+}) {
   const today = new Date().toISOString().slice(0, 10);
-
-  useEffect(() => {
-    try {
-      const s = localStorage.getItem("ioai_streak"); const d = localStorage.getItem("ioai_streak_date");
-      if (s) setStreak(parseInt(s)); if (d) setLastDate(d);
-    } catch {}
-  }, []);
 
   const logToday = () => {
     if (lastDate === today) return;
@@ -371,10 +361,75 @@ export default function LearningPage() {
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [showTools, setShowTools] = useState(false);
 
+  // ── LIFTED STATE (Pomodoro + Streak) ──────────────────────────────
+  const [pomoSessions, setPomoSessions] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [streakDate, setStreakDate] = useState("");
+
+  // ── FIREBASE AUTH STATE ───────────────────────────────────────────
+  const [user, setUser] = useState<User | null>(null);
+  const [cloudStatus, setCloudStatus] = useState<'idle' | 'saving' | 'saved' | 'loading'>('idle');
+  const initialLoadDone = useRef(false);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => setUser(u));
+    return () => unsub();
+  }, []);
+
+  // ── LOAD FROM LOCALSTORAGE ────────────────────────────────────────
   useEffect(() => {
     try { const s = localStorage.getItem("ioai_learn_completed"); if (s) setCompleted(new Set(JSON.parse(s))); } catch {}
     try { const n = localStorage.getItem("ioai_learn_notes"); if (n) setNotes(JSON.parse(n)); } catch {}
+    try { const s = localStorage.getItem("ioai_pomo_sessions"); if (s) setPomoSessions(parseInt(s)); } catch {}
+    try { const s = localStorage.getItem("ioai_streak"); if (s) setStreak(parseInt(s)); } catch {}
+    try { const d = localStorage.getItem("ioai_streak_date"); if (d) setStreakDate(d); } catch {}
   }, []);
+
+  // ── AUTO-LOAD FROM FIRESTORE (on sign-in) ─────────────────────────
+  useEffect(() => {
+    if (!user) { initialLoadDone.current = false; return; }
+    setCloudStatus('loading');
+    loadProgress().then(data => {
+      if (data) {
+        if (data.completed) setCompleted(new Set(data.completed));
+        if (data.notes) setNotes(data.notes);
+        if (typeof data.pomoSessions === 'number') setPomoSessions(data.pomoSessions);
+        if (typeof data.streak === 'number') setStreak(data.streak);
+        if (data.streakDate) setStreakDate(data.streakDate);
+        // Sync to localStorage too
+        try {
+          if (data.completed) localStorage.setItem("ioai_learn_completed", JSON.stringify(data.completed));
+          if (data.notes) localStorage.setItem("ioai_learn_notes", JSON.stringify(data.notes));
+          if (typeof data.pomoSessions === 'number') localStorage.setItem("ioai_pomo_sessions", String(data.pomoSessions));
+          if (typeof data.streak === 'number') localStorage.setItem("ioai_streak", String(data.streak));
+          if (data.streakDate) localStorage.setItem("ioai_streak_date", data.streakDate);
+        } catch {}
+      }
+      initialLoadDone.current = true;
+      setCloudStatus('saved');
+    }).catch(() => {
+      initialLoadDone.current = true;
+      setCloudStatus('idle');
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  // ── AUTO-SAVE TO FIRESTORE (debounced 1.5s) ───────────────────────
+  useEffect(() => {
+    if (!user || !initialLoadDone.current) return;
+    setCloudStatus('saving');
+    const timer = setTimeout(() => {
+      saveProgress({
+        completed: [...completed],
+        notes,
+        pomoSessions,
+        streak,
+        streakDate,
+      }).then(() => setCloudStatus('saved')).catch(() => setCloudStatus('idle'));
+    }, 1500);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [completed, notes, pomoSessions, streak, streakDate, user]);
 
   const toggleTopic = (key: string) => {
     setCompleted(prev => {
@@ -483,6 +538,19 @@ export default function LearningPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              {/* Google Sign-in / Cloud status */}
+              {!user ? (
+                <button onClick={() => signInWithGoogle().catch(() => {})}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all bg-white/5 border-white/10 text-white/60 hover:text-white hover:border-cyan-400/30 hover:bg-cyan-400/5">
+                  <LogIn className="w-3.5 h-3.5" /> Sign in to sync
+                </button>
+              ) : (
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-[10px] font-bold border border-emerald-500/20 bg-emerald-500/5 text-emerald-400">
+                  <Cloud className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{cloudStatus === 'saving' ? 'Saving…' : cloudStatus === 'loading' ? 'Loading…' : `Synced ✓`}</span>
+                  <span className="hidden lg:inline text-white/30 ml-1">{user.email}</span>
+                </div>
+              )}
               <button onClick={() => setShowTools(!showTools)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${showTools ? "bg-cyan-400/10 border-cyan-400/20 text-cyan-400" : "bg-white/5 border-white/10 text-white/40 hover:text-white"}`}>
                 {showTools ? "Hide Tools" : "🛠 Study Tools"}
@@ -502,8 +570,8 @@ export default function LearningPage() {
         {/* STUDY TOOLS PANEL */}
         {showTools && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 animate-in">
-            <PomodoroTimer />
-            <StreakTracker />
+            <PomodoroTimer sessions={pomoSessions} setSessions={(n) => { setPomoSessions(n); try { localStorage.setItem("ioai_pomo_sessions", String(n)); } catch {} }} />
+            <StreakTracker streak={streak} setStreak={(n) => { setStreak(n); try { localStorage.setItem("ioai_streak", String(n)); } catch {} }} lastDate={streakDate} setLastDate={(d) => { setStreakDate(d); try { localStorage.setItem("ioai_streak_date", d); } catch {} }} />
             
             {/* Cloud Sync/Backup card */}
             <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-4 flex flex-col">
