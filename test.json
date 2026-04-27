@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "title": "MATHEMATICS FOR AI",
+    "content_length": 14119,
+    "num_sub_subjects": 13
+  },
+  {
+    "id": "2",
+    "title": "PYTHON & PROGRAMMING TOOLS",
+    "content_length": 3044,
+    "num_sub_subjects": 4
+  },
+  {
+    "id": "3",
+    "title": "CLASSICAL MACHINE LEARNING",
+    "content_length": 5759,
+    "num_sub_subjects": 7
+  },
+  {
+    "id": "4",
+    "title": "DEEP LEARNING",
+    "content_length": 5889,
+    "num_sub_subjects": 5
+  },
+  {
+    "id": "5",
+    "title": "COMPUTER VISION",
+    "content_length": 5002,
+    "num_sub_subjects": 5
+  },
+  {
+    "id": "6",
+    "title": "NATURAL LANGUAGE PROCESSING",
+    "content_length": 5788,
+    "num_sub_subjects": 5
+  },
+  {
+    "id": "7",
+    "title": "AUDIO / MULTIMODAL AI",
+    "content_length": 2003,
+    "num_sub_subjects": 3
+  },
+  {
+    "id": "8",
+    "title": "GENERATIVE AI & IOAI PRACTICAL ROUND",
+    "content_length": 2294,
+    "num_sub_subjects": 4
+  },
+  {
+    "id": "9",
+    "title": "CONTEST EXECUTION SKILLS",
+    "content_length": 6005,
+    "num_sub_subjects": 5
+  }
+]

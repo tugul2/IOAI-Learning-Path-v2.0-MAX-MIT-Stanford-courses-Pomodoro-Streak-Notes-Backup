@@ -1,0 +1,47 @@
+[
+  {
+    "id": "subject-1",
+    "label": "MATHEMATICS FOR AI",
+    "topics": []
+  },
+  {
+    "id": "subject-2",
+    "label": "PYTHON & PROGRAMMING TOOLS",
+    "topics": []
+  },
+  {
+    "id": "subject-3",
+    "label": "CLASSICAL MACHINE LEARNING",
+    "topics": []
+  },
+  {
+    "id": "subject-4",
+    "label": "DEEP LEARNING",
+    "topics": []
+  },
+  {
+    "id": "subject-5",
+    "label": "COMPUTER VISION",
+    "topics": []
+  },
+  {
+    "id": "subject-6",
+    "label": "NATURAL LANGUAGE PROCESSING",
+    "topics": []
+  },
+  {
+    "id": "subject-7",
+    "label": "AUDIO / MULTIMODAL AI",
+    "topics": []
+  },
+  {
+    "id": "subject-8",
+    "label": "GENERATIVE AI & IOAI PRACTICAL ROUND",
+    "topics": []
+  },
+  {
+    "id": "subject-9",
+    "label": "CONTEST EXECUTION SKILLS",
+    "topics": []
+  }
+]

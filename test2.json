@@ -1,0 +1,95 @@
+[
+  {
+    "title": "MATHEMATICS FOR AI",
+    "topics": [
+      {
+        "sub_title": "\ud83d\udcd0 1.1 Linear Algebra",
+        "levels_count": 4
+      },
+      {
+        "sub_title": "\ud83d\udcca 1.2 Probability and Statistics",
+        "levels_count": 3
+      },
+      {
+        "sub_title": "\u2207 1.3 Calculus and Optimization",
+        "levels_count": 3
+      }
+    ]
+  },
+  {
+    "title": "PYTHON & PROGRAMMING TOOLS",
+    "topics": [
+      {
+        "sub_title": "\ud83d\udc0d 2.1 Core Python",
+        "levels_count": 3
+      }
+    ]
+  },
+  {
+    "title": "CLASSICAL MACHINE LEARNING",
+    "topics": [
+      {
+        "sub_title": "\ud83e\udd16 3.1 Supervised Learning",
+        "levels_count": 3
+      },
+      {
+        "sub_title": "\ud83d\udcc9 3.2 Unsupervised Learning",
+        "levels_count": 2
+      }
+    ]
+  },
+  {
+    "title": "DEEP LEARNING",
+    "topics": [
+      {
+        "sub_title": "\ud83e\udde0 4.1 Neural Networks from Zero",
+        "levels_count": 4
+      }
+    ]
+  },
+  {
+    "title": "COMPUTER VISION",
+    "topics": [
+      {
+        "sub_title": "\ud83d\udc41\ufe0f 5.1 Convolutional Neural Networks",
+        "levels_count": 4
+      }
+    ]
+  },
+  {
+    "title": "NATURAL LANGUAGE PROCESSING",
+    "topics": [
+      {
+        "sub_title": "\ud83d\udcac 6.1 NLP from Rules to Transformers",
+        "levels_count": 4
+      }
+    ]
+  },
+  {
+    "title": "AUDIO / MULTIMODAL AI",
+    "topics": [
+      {
+        "sub_title": "\ud83c\udfb5 7.1 Audio Understanding",
+        "levels_count": 2
+      }
+    ]
+  },
+  {
+    "title": "GENERATIVE AI & IOAI PRACTICAL ROUND",
+    "topics": [
+      {
+        "sub_title": "\ud83c\udfa8 8.1 Diffusion Models and Image Generation",
+        "levels_count": 3
+      }
+    ]
+  },
+  {
+    "title": "CONTEST EXECUTION SKILLS",
+    "topics": [
+      {
+        "sub_title": "\ud83c\udfc6 9.1 IOAI-Specific Strategies",
+        "levels_count": 4
+      }
+    ]
+  }
+]

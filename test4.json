@@ -1,0 +1,164 @@
+[
+  {
+    "title": "MATHEMATICS FOR AI",
+    "topics": [
+      {
+        "name": "\ud83d\udcd0 1.1 Linear Algebra - BEGINNER \u2014 Vectors, Matrices, Basic Operations"
+      },
+      {
+        "name": "\ud83d\udcd0 1.1 Linear Algebra - INTERMEDIATE \u2014 Eigenvalues, SVD, Projections, PCA"
+      },
+      {
+        "name": "\ud83d\udcd0 1.1 Linear Algebra - ADVANCED \u2014 Matrix Calculus, Conditioning, Gram-Schmidt"
+      },
+      {
+        "name": "\ud83d\udcd0 1.1 Linear Algebra - MASTER \u2014 Spectral Methods, Tensor Algebra, Structured Matrices"
+      },
+      {
+        "name": "\ud83d\udcca 1.2 Probability and Statistics - BEGINNER \u2014 Random Variables, Distributions, Expectation"
+      },
+      {
+        "name": "\ud83d\udcca 1.2 Probability and Statistics - INTERMEDIATE \u2014 Bayes, Joint/Conditional Distributions, Entropy"
+      },
+      {
+        "name": "\ud83d\udcca 1.2 Probability and Statistics - ADVANCED \u2014 Concentration Inequalities, Generalization Bounds"
+      },
+      {
+        "name": "\u2207 1.3 Calculus and Optimization - BEGINNER \u2014 Derivatives, Chain Rule, Partial Derivatives"
+      },
+      {
+        "name": "\u2207 1.3 Calculus and Optimization - INTERMEDIATE \u2014 Backpropagation, Gradient Descent Variants"
+      },
+      {
+        "name": "\u2207 1.3 Calculus and Optimization - ADVANCED \u2014 Convex Optimization, Second-Order Methods, Loss Landscapes"
+      }
+    ]
+  },
+  {
+    "title": "PYTHON & PROGRAMMING TOOLS",
+    "topics": [
+      {
+        "name": "\ud83d\udc0d 2.1 Core Python - BEGINNER \u2014 Syntax, Functions, Data Structures"
+      },
+      {
+        "name": "\ud83d\udc0d 2.1 Core Python - INTERMEDIATE \u2014 OOP, Generators, NumPy, Pandas"
+      },
+      {
+        "name": "\ud83d\udc0d 2.1 Core Python - ADVANCED \u2014 PyTorch Custom Modules, Efficient Pipelines"
+      }
+    ]
+  },
+  {
+    "title": "CLASSICAL MACHINE LEARNING",
+    "topics": [
+      {
+        "name": "\ud83e\udd16 3.1 Supervised Learning - BEGINNER \u2014 Linear & Logistic Regression"
+      },
+      {
+        "name": "\ud83e\udd16 3.1 Supervised Learning - INTERMEDIATE \u2014 Trees, Ensembles, SVMs"
+      },
+      {
+        "name": "\ud83e\udd16 3.1 Supervised Learning - ADVANCED \u2014 Feature Engineering, Pipelines, Calibration"
+      },
+      {
+        "name": "\ud83d\udcc9 3.2 Unsupervised Learning - BEGINNER \u2014 K-Means, PCA"
+      },
+      {
+        "name": "\ud83d\udcc9 3.2 Unsupervised Learning - INTERMEDIATE \u2014 DBSCAN, Hierarchical, GMMs, t-SNE/UMAP"
+      }
+    ]
+  },
+  {
+    "title": "DEEP LEARNING",
+    "topics": [
+      {
+        "name": "\ud83e\udde0 4.1 Neural Networks from Zero - BEGINNER \u2014 Perceptrons, Activations, Forward Pass"
+      },
+      {
+        "name": "\ud83e\udde0 4.1 Neural Networks from Zero - INTERMEDIATE \u2014 Full Training Loop, Regularization, Batch Norm"
+      },
+      {
+        "name": "\ud83e\udde0 4.1 Neural Networks from Zero - ADVANCED \u2014 Custom Architectures, Attention, Mixed Precision"
+      },
+      {
+        "name": "\ud83e\udde0 4.1 Neural Networks from Zero - MASTER \u2014 Architecture Search, Fine-Tuning Large Models, Efficiency"
+      }
+    ]
+  },
+  {
+    "title": "COMPUTER VISION",
+    "topics": [
+      {
+        "name": "\ud83d\udc41\ufe0f 5.1 Convolutional Neural Networks - BEGINNER \u2014 Convolutions, Filters, Pooling"
+      },
+      {
+        "name": "\ud83d\udc41\ufe0f 5.1 Convolutional Neural Networks - INTERMEDIATE \u2014 Transfer Learning, ResNet, Data Augmentation"
+      },
+      {
+        "name": "\ud83d\udc41\ufe0f 5.1 Convolutional Neural Networks - ADVANCED \u2014 Detection, Segmentation, Adversarial Examples"
+      },
+      {
+        "name": "\ud83d\udc41\ufe0f 5.1 Convolutional Neural Networks - MASTER \u2014 Vision Transformers, CLIP, Diffusion, Self-Supervised Vision"
+      }
+    ]
+  },
+  {
+    "title": "NATURAL LANGUAGE PROCESSING",
+    "topics": [
+      {
+        "name": "\ud83d\udcac 6.1 NLP from Rules to Transformers - BEGINNER \u2014 Tokenization, TF-IDF, Classical NLP"
+      },
+      {
+        "name": "\ud83d\udcac 6.1 NLP from Rules to Transformers - INTERMEDIATE \u2014 Word Embeddings, RNNs, Sequence Models"
+      },
+      {
+        "name": "\ud83d\udcac 6.1 NLP from Rules to Transformers - ADVANCED \u2014 Transformers, BERT, Fine-Tuning"
+      },
+      {
+        "name": "\ud83d\udcac 6.1 NLP from Rules to Transformers - MASTER \u2014 LLMs, Instruction Tuning, RAG, Efficient Inference"
+      }
+    ]
+  },
+  {
+    "title": "AUDIO / MULTIMODAL AI",
+    "topics": [
+      {
+        "name": "\ud83c\udfb5 7.1 Audio Understanding - BEGINNER \u2014 Signal Processing Basics, Spectrograms"
+      },
+      {
+        "name": "\ud83c\udfb5 7.1 Audio Understanding - INTERMEDIATE \u2014 Audio Classification, Pre-trained Models"
+      }
+    ]
+  },
+  {
+    "title": "GENERATIVE AI & IOAI PRACTICAL ROUND",
+    "topics": [
+      {
+        "name": "\ud83c\udfa8 8.1 Diffusion Models and Image Generation - BEGINNER \u2014 How Diffusion Works"
+      },
+      {
+        "name": "\ud83c\udfa8 8.1 Diffusion Models and Image Generation - INTERMEDIATE \u2014 Stable Diffusion, Prompting, ControlNet"
+      },
+      {
+        "name": "\ud83c\udfa8 8.1 Diffusion Models and Image Generation - MASTER \u2014 Multimodal Systems, CLIP, Vision-Language Models"
+      }
+    ]
+  },
+  {
+    "title": "CONTEST EXECUTION SKILLS",
+    "topics": [
+      {
+        "name": "\ud83c\udfc6 9.1 IOAI-Specific Strategies - BEGINNER \u2014 Template Notebook, EDA, Baseline in 1h"
+      },
+      {
+        "name": "\ud83c\udfc6 9.1 IOAI-Specific Strategies - INTERMEDIATE \u2014 Experiment Tracking, Ablations, Time Management"
+      },
+      {
+        "name": "\ud83c\udfc6 9.1 IOAI-Specific Strategies - ADVANCED \u2014 IOAI Task Re-implementation"
+      },
+      {
+        "name": "\ud83c\udfc6 9.1 IOAI-Specific Strategies - MASTER \u2014 Full Mock Contest Simulation"
+      }
+    ]
+  }
+]

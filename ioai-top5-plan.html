@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IOAI Top 5% Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root,[data-theme="light"]{
+  --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;
+  --color-surface-offset:#f0ede8;--color-surface-dynamic:#e6e4df;
+  --color-divider:#dcd9d5;--color-border:#d4d1ca;
+  --color-text:#28251d;--color-text-muted:#7a7974;--color-text-faint:#bab9b4;
+  --color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-highlight:#cedcd8;
+  --color-accent:#da7101;--color-gold:#d19900;--color-success:#437a22;
+  --color-blue:#006494;--color-purple:#7a39bb;
+  --shadow-sm:0 1px 2px rgba(40,37,29,.06);
+  --shadow-md:0 4px 12px rgba(40,37,29,.08);
+  --shadow-lg:0 12px 32px rgba(40,37,29,.12);
+  --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;
+  --font-body:'Inter',sans-serif;--font-display:'Instrument Serif',Georgia,serif;
+  --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);
+  --text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+  --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --transition:180ms cubic-bezier(.16,1,.3,1);
+  --sidebar-width:260px;
+}
+[data-theme="dark"]{
+  --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;
+  --color-surface-offset:#1d1c1a;--color-surface-dynamic:#2d2c2a;
+  --color-divider:#262523;--color-border:#393836;
+  --color-text:#cdccca;--color-text-muted:#797876;--color-text-faint:#5a5957;
+  --color-primary:#4f98a3;--color-primary-hover:#227f8b;--color-primary-highlight:#313b3b;
+  --color-accent:#fdab43;--color-gold:#e8af34;--color-success:#6daa45;
+  --color-blue:#5591c7;--color-purple:#a86fdf;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.2);--shadow-md:0 4px 12px rgba(0,0,0,.3);--shadow-lg:0 12px 32px rgba(0,0,0,.4);
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;scroll-padding-top:80px}
+body{font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);min-height:100dvh;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+p,li{text-wrap:pretty;max-width:72ch}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.2;font-family:var(--font-display)}
+a{color:var(--color-primary);text-decoration:none;transition:color var(--transition)}
+a:hover{color:var(--color-primary-hover)}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+
+/* ── LAYOUT ── */
+.app{display:flex;min-height:100dvh}
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-width);
+  background:var(--color-surface);border-right:1px solid var(--color-border);
+  overflow-y:auto;z-index:100;padding:var(--space-6,1.5rem) 0;
+  transition:transform var(--transition);
+}
+.main{margin-left:var(--sidebar-width);flex:1;min-width:0}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in oklch,var(--color-bg) 90%,transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--color-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 2rem;gap:1rem;
+}
+.topbar-title{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text)}
+.topbar-title span{color:var(--color-primary)}
+.theme-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:var(--radius-md);
+  background:var(--color-surface-offset);border:1px solid var(--color-border);
+  color:var(--color-text-muted);transition:all var(--transition);
+}
+.theme-toggle:hover{background:var(--color-surface-dynamic);color:var(--color-text)}
+
+/* ── SIDEBAR NAV ── */
+.sidebar-logo{padding:.25rem 1.25rem 1rem;border-bottom:1px solid var(--color-divider);margin-bottom:.5rem}
+.sidebar-logo-text{display:flex;align-items:center;gap:.5rem;font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text)}
+.logo-badge{
+  width:32px;height:32px;border-radius:var(--radius-md);
+  background:var(--color-primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;font-family:var(--font-body);
+}
+.nav-section-label{
+  font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--color-text-faint);padding:.75rem 1.25rem .25rem;
+}
+.nav-item{
+  display:flex;align-items:center;gap:.625rem;padding:.5rem 1.25rem;
+  font-size:var(--text-sm);color:var(--color-text-muted);
+  border-radius:0;cursor:pointer;transition:all var(--transition);
+  border-left:2px solid transparent;
+}
+.nav-item:hover{color:var(--color-text);background:var(--color-surface-offset)}
+.nav-item.active{color:var(--color-primary);border-left-color:var(--color-primary);background:color-mix(in oklch,var(--color-primary) 8%,var(--color-surface))}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;opacity:.6}
+.nav-phase-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── CONTENT ── */
+.content{padding:2rem 2.5rem 4rem;max-width:860px}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,color-mix(in oklch,var(--color-primary) 12%,var(--color-surface)) 0%,var(--color-surface) 60%);
+  border:1px solid var(--color-border);border-radius:var(--radius-xl);
+  padding:2.5rem;margin-bottom:2.5rem;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:color-mix(in oklch,var(--color-primary) 10%,transparent);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:color-mix(in oklch,var(--color-primary) 15%,var(--color-surface));
+  color:var(--color-primary);border:1px solid color-mix(in oklch,var(--color-primary) 25%,transparent);
+  border-radius:var(--radius-full,9999px);padding:.25rem .75rem;
+  font-size:var(--text-xs);font-weight:600;letter-spacing:.04em;margin-bottom:1rem;
+}
+.hero h1{font-size:var(--text-2xl);color:var(--color-text);margin-bottom:.75rem;position:relative}
+.hero h1 em{color:var(--color-primary);font-style:normal}
+.hero-sub{color:var(--color-text-muted);font-size:var(--text-base);max-width:60ch;position:relative}
+.hero-stats{display:flex;gap:1.5rem;margin-top:1.75rem;flex-wrap:wrap;position:relative}
+.hero-stat{
+  background:var(--color-surface-2);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:.625rem 1rem;
+}
+.hero-stat-val{font-size:var(--text-lg);font-weight:700;color:var(--color-text);font-family:var(--font-display);line-height:1}
+.hero-stat-lbl{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:.2rem}
+
+/* ── SECTION HEADER ── */
+.section-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--color-divider)}
+.section-header:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.section-num{
+  width:32px;height:32px;border-radius:var(--radius-md);
+  background:var(--color-surface-offset);border:1px solid var(--color-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;color:var(--color-text-muted);flex-shrink:0;
+}
+.section-title{font-size:var(--text-xl);color:var(--color-text)}
+
+/* ── CARD ── */
+.card{
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;
+  box-shadow:var(--shadow-sm);
+}
+.card-title{font-size:var(--text-base);font-weight:600;color:var(--color-text);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.card-title svg{color:var(--color-primary);flex-shrink:0}
+
+/* ── SKILL GRID ── */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:1rem;margin-bottom:1rem}
+.skill-card{
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:1.25rem;
+  box-shadow:var(--shadow-sm);
+}
+.skill-card-header{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.75rem}
+.skill-icon{
+  width:36px;height:36px;border-radius:var(--radius-md);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.skill-card h3{font-size:var(--text-sm);font-weight:600;color:var(--color-text);line-height:1.3;font-family:var(--font-body)}
+.skill-card ul{list-style:none;padding:0}
+.skill-card li{font-size:var(--text-sm);color:var(--color-text-muted);padding:.25rem 0;border-bottom:1px solid var(--color-divider);display:flex;gap:.5rem;align-items:flex-start;line-height:1.5}
+.skill-card li:last-child{border-bottom:none}
+.skill-card li::before{content:'›';color:var(--color-primary);font-weight:700;flex-shrink:0;margin-top:.05em}
+.skill-card p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6}
+.min-bar{
+  background:color-mix(in oklch,var(--color-gold) 12%,var(--color-surface));
+  border:1px solid color-mix(in oklch,var(--color-gold) 30%,transparent);
+  border-radius:var(--radius-md);padding:.625rem .875rem;margin-top:.75rem;
+  font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5;
+}
+.min-bar strong{color:var(--color-gold)}
+
+/* ── PHASE TIMELINE ── */
+.phase-list{display:flex;flex-direction:column;gap:0}
+.phase-item{display:flex;gap:1.25rem;padding-bottom:2rem;position:relative}
+.phase-item:last-child{padding-bottom:0}
+.phase-item:last-child .phase-line{display:none}
+.phase-left{display:flex;flex-direction:column;align-items:center;gap:0;flex-shrink:0;width:40px}
+.phase-dot{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;color:#fff;flex-shrink:0;z-index:1;
+  font-family:var(--font-body);
+}
+.phase-line{width:2px;flex:1;background:var(--color-divider);margin-top:0}
+.phase-content{flex:1;min-width:0;padding-top:.5rem}
+.phase-header{margin-bottom:.75rem}
+.phase-title{font-size:var(--text-lg);font-weight:600;color:var(--color-text);font-family:var(--font-display)}
+.phase-duration{
+  display:inline-block;font-size:var(--text-xs);font-weight:600;
+  padding:.2rem .6rem;border-radius:var(--radius-full,9999px);margin-bottom:.75rem;
+}
+.phase-section{margin-bottom:.75rem}
+.phase-section-title{font-size:var(--text-sm);font-weight:700;color:var(--color-text);margin-bottom:.35rem;font-family:var(--font-body);text-transform:uppercase;letter-spacing:.04em;font-size:.65rem}
+.phase-section ul{list-style:none;padding:0}
+.phase-section li{font-size:var(--text-sm);color:var(--color-text-muted);padding:.2rem 0;display:flex;gap:.5rem;line-height:1.5}
+.phase-section li::before{content:'–';color:var(--color-text-faint);flex-shrink:0}
+.deliverable{
+  background:color-mix(in oklch,var(--color-success) 10%,var(--color-surface));
+  border:1px solid color-mix(in oklch,var(--color-success) 25%,transparent);
+  border-radius:var(--radius-md);padding:.5rem .875rem;
+  font-size:var(--text-xs);color:var(--color-text-muted);margin-top:.5rem;
+}
+.deliverable strong{color:var(--color-success)}
+
+/* phase colors */
+.ph0{background:var(--color-text-muted)}
+.ph1{background:var(--color-blue)}
+.ph2{background:var(--color-success)}
+.ph3{background:var(--color-purple)}
+.ph4{background:var(--color-accent)}
+.ph5{background:var(--color-primary)}
+.dur0{background:color-mix(in oklch,var(--color-text-muted) 12%,var(--color-surface));color:var(--color-text-muted);border:1px solid color-mix(in oklch,var(--color-text-muted) 25%,transparent)}
+.dur1{background:color-mix(in oklch,var(--color-blue) 12%,var(--color-surface));color:var(--color-blue);border:1px solid color-mix(in oklch,var(--color-blue) 25%,transparent)}
+.dur2{background:color-mix(in oklch,var(--color-success) 12%,var(--color-surface));color:var(--color-success);border:1px solid color-mix(in oklch,var(--color-success) 25%,transparent)}
+.dur3{background:color-mix(in oklch,var(--color-purple) 12%,var(--color-surface));color:var(--color-purple);border:1px solid color-mix(in oklch,var(--color-purple) 25%,transparent)}
+.dur4{background:color-mix(in oklch,var(--color-accent) 12%,var(--color-surface));color:var(--color-accent);border:1px solid color-mix(in oklch,var(--color-accent) 25%,transparent)}
+.dur5{background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));color:var(--color-primary);border:1px solid color-mix(in oklch,var(--color-primary) 25%,transparent)}
+
+/* ── WEEK SCHEDULE ── */
+.week-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:.75rem;margin-bottom:1rem}
+.day-card{
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:1rem;box-shadow:var(--shadow-sm);
+}
+.day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
+.day-name{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+.day-hours{
+  font-size:var(--text-xs);font-weight:600;
+  background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));
+  color:var(--color-primary);border-radius:var(--radius-full,9999px);
+  padding:.15rem .5rem;border:1px solid color-mix(in oklch,var(--color-primary) 20%,transparent);
+}
+.day-rest .day-hours{background:color-mix(in oklch,var(--color-text-faint) 12%,var(--color-surface));color:var(--color-text-faint);border-color:color-mix(in oklch,var(--color-text-faint) 20%,transparent)}
+.day-tasks{list-style:none;padding:0}
+.day-tasks li{font-size:var(--text-xs);color:var(--color-text-muted);padding:.2rem 0;display:flex;gap:.4rem;line-height:1.4}
+.day-tasks li::before{content:'·';color:var(--color-primary);font-weight:700;flex-shrink:0}
+.day-rest .day-tasks li{color:var(--color-text-faint)}
+.day-rest .day-tasks li::before{color:var(--color-text-faint)}
+.week-note{
+  background:color-mix(in oklch,var(--color-primary) 8%,var(--color-surface));
+  border:1px solid color-mix(in oklch,var(--color-primary) 18%,transparent);
+  border-radius:var(--radius-md);padding:.625rem 1rem;
+  font-size:var(--text-sm);color:var(--color-text-muted);
+}
+
+/* ── MILESTONE TABLE ── */
+.milestone-list{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1rem}
+.milestone-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:.875rem 1.25rem;
+}
+.milestone-weeks{
+  font-size:var(--text-xs);font-weight:700;
+  white-space:nowrap;color:#fff;border-radius:var(--radius-md);
+  padding:.25rem .625rem;min-width:90px;text-align:center;flex-shrink:0;
+  align-self:flex-start;margin-top:.1rem;
+}
+.milestone-label{font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.05em}
+.milestone-text{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.5}
+
+/* ── PROGRESS ── */
+.progress-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:1rem;margin-bottom:1rem}
+.progress-card{
+  background:var(--color-surface);border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);padding:1.25rem;box-shadow:var(--shadow-sm);
+}
+.progress-card h3{font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:.75rem;font-family:var(--font-body)}
+.check-list{list-style:none;padding:0}
+.check-list li{font-size:var(--text-sm);color:var(--color-text-muted);padding:.25rem 0;display:flex;gap:.5rem;line-height:1.5}
+.check-list li::before{content:'?';color:var(--color-primary);font-weight:700;flex-shrink:0}
+.benchmark-item{
+  background:var(--color-surface-offset);border-radius:var(--radius-md);
+  padding:.625rem .875rem;margin-bottom:.5rem;font-size:var(--text-sm);
+  color:var(--color-text-muted);line-height:1.5;
+}
+.benchmark-item strong{color:var(--color-text)}
+
+/* ── STUDY LOG FORMS & CARDS ── */
+.form-input {
+  background:var(--color-surface-offset); border:1px solid var(--color-border);
+  color:var(--color-text); padding:0.625rem 0.75rem; border-radius:var(--radius-md);
+  font-size:var(--text-sm); font-family:inherit; transition:border-color var(--transition);
+  outline:none; width: 100%;
+}
+.form-input:focus { border-color:var(--color-primary); }
+.btn-primary { background:var(--color-primary); color:#fff; padding:0.625rem 1.25rem; border-radius:var(--radius-md); font-weight:600; font-size:var(--text-sm); transition:background var(--transition); border:1px solid transparent; }
+.btn-primary:hover { background:var(--color-primary-hover); cursor:pointer; }
+.btn-secondary { background:var(--color-surface-offset); border:1px solid var(--color-border); color:var(--color-text); padding:0.625rem 1.25rem; border-radius:var(--radius-md); font-weight:600; font-size:var(--text-sm); transition:background var(--transition); }
+.btn-secondary:hover { background:var(--color-surface-dynamic); cursor:pointer;}
+
+.log-entry {
+  background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:1.25rem; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:0.5rem;
+}
+.log-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 0.25rem; flex-wrap:wrap; gap:0.5rem; }
+.log-meta { font-size:var(--text-xs); color:var(--color-text-muted); display:flex; gap:0.75rem; align-items:center; }
+.log-badge { background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface)); color:var(--color-primary); padding:0.2rem 0.6rem; border-radius:var(--radius-full); font-weight:600; border:1px solid color-mix(in oklch,var(--color-primary) 20%,transparent); font-size:var(--text-xs); }
+.log-hours-badge { background:var(--color-surface-offset); border:1px solid var(--color-border); padding:0.2rem 0.6rem; border-radius:var(--radius-md); font-weight:600; font-size:var(--text-xs); color:var(--color-text); }
+.log-delete { background:none; border:none; color:var(--color-text-muted); cursor:pointer; font-size:var(--text-xs); padding:0.2rem 0.5rem; transition:color var(--transition); }
+.log-delete:hover { color:#d163a7; }
+
+/* ── HOW TO USE ── */
+.steps{list-style:none;padding:0;counter-reset:step-counter}
+.steps li{
+  counter-increment:step-counter;display:flex;gap:1rem;
+  padding:.875rem 0;border-bottom:1px solid var(--color-divider);
+  font-size:var(--text-base);color:var(--color-text-muted);line-height:1.6;
+}
+.steps li:last-child{border-bottom:none}
+.steps li::before{
+  content:counter(step-counter);flex-shrink:0;
+  width:28px;height:28px;border-radius:50%;
+  background:var(--color-primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:700;font-family:var(--font-body);margin-top:.1rem;
+}
+
+/* ── FOOTER NOTE ── */
+.footer-note{
+  background:linear-gradient(135deg,color-mix(in oklch,var(--color-primary) 10%,var(--color-surface)),var(--color-surface));
+  border:1px solid var(--color-border);border-radius:var(--radius-xl);
+  padding:2rem;margin-top:2.5rem;text-align:center;
+}
+.footer-note p{font-size:var(--text-base);color:var(--color-text-muted);max-width:60ch;margin-inline:auto}
+
+/* ── MOBILE ── */
+.menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-md);background:var(--color-surface-offset);border:1px solid var(--color-border);color:var(--color-text-muted)}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:flex}
+  .content{padding:1.25rem 1rem 3rem}
+  .hero{padding:1.5rem}
+  .hero-stats{gap:.75rem}
+  .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:90}
+  .sidebar-overlay.open{display:block}
+}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+</style>
+</head>
+<body>
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">
+      <div class="logo-badge">AI</div>
+      <span>IOAI Roadmap</span>
+    </div>
+  </div>
+
+  <div class="nav-section-label">Overview</div>
+  <a class="nav-item active" href="#goals" onclick="setActive(this)"><span class="nav-dot"></span>Goals &amp; Assumptions</a>
+
+  <div class="nav-section-label">Skill Checklist</div>
+  <a class="nav-item" href="#skills" onclick="setActive(this)"><span class="nav-dot"></span>All Skills</a>
+  <a class="nav-item" href="#skills-math" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-blue)"></span>Mathematics</a>
+  <a class="nav-item" href="#skills-python" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-success)"></span>Python &amp; Environment</a>
+  <a class="nav-item" href="#skills-ml" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-purple)"></span>Classical ML</a>
+  <a class="nav-item" href="#skills-dl" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-accent)"></span>Deep Learning</a>
+  <a class="nav-item" href="#skills-domains" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-primary)"></span>CV / NLP / Audio</a>
+  <a class="nav-item" href="#skills-contest" onclick="setActive(this)"><span class="nav-dot" style="background:var(--color-gold)"></span>Contest Skills</a>
+
+  <div class="nav-section-label">12-Month Plan</div>
+  <a class="nav-item" href="#phase0" onclick="setActive(this)"><span class="nav-phase-dot ph0"></span>Phase 0 · Baseline</a>
+  <a class="nav-item" href="#phase1" onclick="setActive(this)"><span class="nav-phase-dot ph1"></span>Phase 1 · Math + Python</a>
+  <a class="nav-item" href="#phase2" onclick="setActive(this)"><span class="nav-phase-dot ph2"></span>Phase 2 · Core ML</a>
+  <a class="nav-item" href="#phase3" onclick="setActive(this)"><span class="nav-phase-dot ph3"></span>Phase 3 · DL/CV/NLP</a>
+  <a class="nav-item" href="#phase4" onclick="setActive(this)"><span class="nav-phase-dot ph4"></span>Phase 4 · IOAI Practice</a>
+  <a class="nav-item" href="#phase5" onclick="setActive(this)"><span class="nav-phase-dot ph5"></span>Phase 5 · Final Polish</a>
+
+  <div class="nav-section-label">Schedule &amp; Tracking</div>
+  <a class="nav-item" href="#weekly" onclick="setActive(this)"><span class="nav-dot"></span>Weekly Schedule</a>
+  <a class="nav-item" href="#milestones" onclick="setActive(this)"><span class="nav-dot"></span>Milestone Summary</a>
+  <a class="nav-item" href="#progress" onclick="setActive(this)"><span class="nav-dot"></span>Progress &amp; Benchmarks</a>
+  <a class="nav-item" href="#log" onclick="setActive(this)"><span class="nav-dot"></span>Study Log</a>
+  <a class="nav-item" href="#howto" onclick="setActive(this)"><span class="nav-dot"></span>How to Use This Plan</a>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <button class="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Roadmap to <span>Top 5%</span> in AI Olympiads</span>
+    </div>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </header>
+
+  <div class="content">
+
+    <!-- HERO -->
+    <section id="goals">
+      <div class="hero">
+        <div class="hero-badge">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          IOAI &amp; National AI Olympiad
+        </div>
+        <h1>Roadmap to <em>Top 5%</em><br>in AI Olympiads</h1>
+        <p class="hero-sub">A full 12-month structured plan — skill checklist, phase roadmap, and weekly schedule — to compete at the highest level in IOAI and similar international AI competitions.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-val">12</div><div class="hero-stat-lbl">Month Plan</div></div>
+          <div class="hero-stat"><div class="hero-stat-val">6</div><div class="hero-stat-lbl">Phases</div></div>
+          <div class="hero-stat"><div class="hero-stat-val">14–18h</div><div class="hero-stat-lbl">Per Week</div></div>
+          <div class="hero-stat"><div class="hero-stat-val">Top 5%</div><div class="hero-stat-lbl">Target</div></div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-num">0</div>
+        <h2 class="section-title">Assumptions &amp; Goals</h2>
+      </div>
+      <div class="card">
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem">
+          <li style="display:flex;gap:.75rem;align-items:flex-start;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-primary);font-weight:700;flex-shrink:0">Target</span>Place in roughly the top 5% at IOAI / national AI Olympiads (or similar AI competitions) in the next 12–18 months.</li>
+          <li style="display:flex;gap:.75rem;align-items:flex-start;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-primary);font-weight:700;flex-shrink:0">Level</span>Advanced high‑school student with strong interest in AI, some coding experience, and willingness to work 14–18 hours per week.</li>
+          <li style="display:flex;gap:.75rem;align-items:flex-start;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-primary);font-weight:700;flex-shrink:0">Format</span>IOAI‑style setup — Scientific Round with ML/NLP/CV tasks; Practical/Team Round with creative / robotics / generative AI tasks; restricted environment (Bohrium, fixed GPU, limited internet, no high‑level AutoML).</li>
+        </ul>
+      </div>
+      <div class="card" style="background:color-mix(in oklch,var(--color-primary) 6%,var(--color-surface))">
+        <div class="card-title">This plan covers</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+          <span style="font-size:var(--text-xs);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-full,9999px);padding:.2rem .7rem;color:var(--color-text-muted)">Skill checklist</span>
+          <span style="font-size:var(--text-xs);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-full,9999px);padding:.2rem .7rem;color:var(--color-text-muted)">Phase roadmap (12 months)</span>
+          <span style="font-size:var(--text-xs);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-full,9999px);padding:.2rem .7rem;color:var(--color-text-muted)">Weekly timetable template</span>
+          <span style="font-size:var(--text-xs);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-full,9999px);padding:.2rem .7rem;color:var(--color-text-muted)">Phase-by-phase milestones</span>
+          <span style="font-size:var(--text-xs);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-full,9999px);padding:.2rem .7rem;color:var(--color-text-muted)">Progress checks &amp; adaptation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILL CHECKLIST -->
+    <section id="skills">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <h2 class="section-title">Skill Checklist for Top 5%</h2>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1.5rem">Think of this as the <strong style="color:var(--color-text)">finished product</strong>: by the end, you should be comfortable with all of the following.</p>
+
+      <!-- 1.1 Math -->
+      <div id="skills-math" style="margin-bottom:1.75rem">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-blue) 15%,var(--color-surface));color:var(--color-blue)">∑</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.1 Mathematics</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">You do <em>not</em> need Olympiad math, but you must be fast and fluent with the math that powers ML/AI.</p>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-blue) 12%,var(--color-surface));color:var(--color-blue);font-size:.75rem;font-weight:700">LA</div>
+              <h3>Linear Algebra</h3>
+            </div>
+            <ul>
+              <li>Vectors, matrices, norms, dot product, matrix multiplication, transpose, inverse.</li>
+              <li>Eigenvalues/eigenvectors, diagonalization, spectral decomposition in the context of PCA and SVD.</li>
+              <li>Rank, null space, projections, orthogonality.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-purple) 12%,var(--color-surface));color:var(--color-purple);font-size:.75rem;font-weight:700">P</div>
+              <h3>Probability &amp; Statistics</h3>
+            </div>
+            <ul>
+              <li>Random variables, expectation, variance, covariance, independence.</li>
+              <li>Common distributions: Bernoulli, binomial, uniform, normal, etc.</li>
+              <li>Law of large numbers, central limit intuition (informal is fine).</li>
+              <li>Bayes' theorem, priors/posteriors, likelihood; naive Bayes classifier.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-accent) 12%,var(--color-surface));color:var(--color-accent);font-size:.75rem;font-weight:700">∇</div>
+              <h3>Calculus &amp; Optimization</h3>
+            </div>
+            <ul>
+              <li>Derivatives, partial derivatives, gradients, chain rule.</li>
+              <li>Gradient descent and variants (SGD, momentum, Adam). Explain step‑by‑step updates for simple models.</li>
+              <li>Convex vs non‑convex intuition; local minima/saddle points.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="min-bar">⚡ <strong>Minimum bar:</strong> you can derive a one‑step gradient update for a tiny neural network on paper and explain why that step makes sense.</div>
+      </div>
+
+      <!-- 1.2 Python -->
+      <div id="skills-python" style="margin-bottom:1.75rem">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-success) 15%,var(--color-surface));color:var(--color-success);font-size:.85rem;font-weight:700">Py</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.2 Programming &amp; Environment Fluency</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">You should treat Python and the IOAI toolchain as "native language".</p>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-success) 12%,var(--color-surface));color:var(--color-success);font-size:.7rem;font-weight:700">PY</div>
+              <h3>Core Python</h3>
+            </div>
+            <ul>
+              <li>Control flow, functions, list/dict/set comprehension, classes.</li>
+              <li>Reading/writing files, argument parsing, basic debugging.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-success) 12%,var(--color-surface));color:var(--color-success);font-size:.7rem;font-weight:700">SCI</div>
+              <h3>Scientific Python Stack</h3>
+            </div>
+            <ul>
+              <li>NumPy for vectorized operations, broadcasting, linear algebra.</li>
+              <li>Pandas for tabular data (joins, groupby, pivot, missing values, data cleaning).</li>
+              <li>Matplotlib/Seaborn or Plotly for quick exploratory data analysis.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-success) 12%,var(--color-surface));color:var(--color-success);font-size:.7rem;font-weight:700">ML</div>
+              <h3>ML/DL Libraries</h3>
+            </div>
+            <ul>
+              <li>Scikit‑learn for classical ML (models, pipelines, CV, metrics).</li>
+              <li>PyTorch (or equivalent) for defining, training, and debugging neural networks (custom modules, training loops, optimizers).</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-success) 12%,var(--color-surface));color:var(--color-success);font-size:.7rem;font-weight:700">ENV</div>
+              <h3>Contest Environment</h3>
+            </div>
+            <ul>
+              <li>Comfortable coding in Jupyter on a standardized environment (like Bohrium) with limited internet and only whitelisted docs + integrated ChatGPT 4o.</li>
+              <li>No dependency on high‑level AutoML / hyperparameter frameworks or external APIs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.3 Classical ML -->
+      <div id="skills-ml" style="margin-bottom:1.75rem">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-purple) 15%,var(--color-surface));color:var(--color-purple);font-size:.7rem;font-weight:700">ML</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.3 Classical Machine Learning</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">You should understand these models conceptually, and be able to implement useful pipelines around them.</p>
+        <div class="card">
+          <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:.35rem">
+            <li style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;gap:.5rem"><span style="color:var(--color-purple);flex-shrink:0">›</span>Supervised: linear regression, logistic regression, K‑NN, decision trees, random forests, gradient boosting, SVM.</li>
+            <li style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;gap:.5rem"><span style="color:var(--color-purple);flex-shrink:0">›</span>Unsupervised: K‑means, hierarchical clustering, Gaussian mixture intuition, PCA, basic manifold methods (t‑SNE/UMAP conceptually).</li>
+            <li style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;gap:.5rem"><span style="color:var(--color-purple);flex-shrink:0">›</span>Model evaluation: train/val/test splits, cross‑validation, metrics (accuracy, precision, recall, F1, ROC‑AUC, logloss).</li>
+            <li style="font-size:var(--text-sm);color:var(--color-text-muted);display:flex;gap:.5rem"><span style="color:var(--color-purple);flex-shrink:0">›</span>Common patterns: bias–variance trade‑off, under/overfitting, regularization (L1/L2), data leakage.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 1.4 Deep Learning -->
+      <div id="skills-dl" style="margin-bottom:1.75rem">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-accent) 15%,var(--color-surface));color:var(--color-accent);font-size:.7rem;font-weight:700">DL</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.4 Deep Learning</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">Based on IOAI syllabus (neural networks, embeddings, attention, Transformers).</p>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-accent) 12%,var(--color-surface));color:var(--color-accent);font-size:.65rem;font-weight:700">FND</div>
+              <h3>Fundamentals</h3>
+            </div>
+            <ul>
+              <li>Perceptron, feed‑forward networks, activation functions.</li>
+              <li>Losses: MSE, cross‑entropy; probabilistic interpretation.</li>
+              <li>Backpropagation, gradients, mini‑batch training.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-accent) 12%,var(--color-surface));color:var(--color-accent);font-size:.65rem;font-weight:700">ARC</div>
+              <h3>Architectures</h3>
+            </div>
+            <ul>
+              <li>MLPs for tabular and simple structured data.</li>
+              <li>CNNs for images (convolution, pooling, batch norm, residual connections).</li>
+              <li>Attention and Transformer architectures (self‑attention, positional encodings, encoder vs decoder vs encoder‑decoder).</li>
+              <li>Embeddings for text, images, audio; encoder–decoder models.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-accent) 12%,var(--color-surface));color:var(--color-accent);font-size:.65rem;font-weight:700">TRN</div>
+              <h3>Training Practices</h3>
+            </div>
+            <ul>
+              <li>Regularization: dropout, weight decay, early stopping, data augmentation.</li>
+              <li>Learning‑rate schedules, optimizers (SGD, Adam/AdamW), weight initialization.</li>
+              <li>Debugging: vanishing/exploding gradients, overfitting, underfitting.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.5 Domains -->
+      <div id="skills-domains" style="margin-bottom:1.75rem">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-primary) 15%,var(--color-surface));color:var(--color-primary);font-size:.65rem;font-weight:700">DOM</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.5 Domain‑Specific AI: CV, NLP, Audio</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">IOAI Scientific Round and similar contests deliberately cover ML, NLP, and CV.</p>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));color:var(--color-primary);font-size:.65rem;font-weight:700">CV</div>
+              <h3>Computer Vision</h3>
+            </div>
+            <ul>
+              <li>Image classification with CNNs; transfer learning from pre‑trained encoders.</li>
+              <li>Object detection/segmentation basics (YOLO/SSD/DETR concepts, U‑Net).</li>
+              <li>Data augmentation, dealing with class imbalance, image preprocessing.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));color:var(--color-primary);font-size:.65rem;font-weight:700">NLP</div>
+              <h3>NLP</h3>
+            </div>
+            <ul>
+              <li>Text preprocessing: tokenization, n‑grams, TF‑IDF.</li>
+              <li>Text classification with classical models and with pre‑trained encoders (BERT‑style).</li>
+              <li>Sequence‑to‑sequence basics (translation, summarization), encoder‑decoder thinking.</li>
+            </ul>
+          </div>
+          <div class="skill-card">
+            <div class="skill-card-header">
+              <div class="skill-icon" style="background:color-mix(in oklch,var(--color-primary) 12%,var(--color-surface));color:var(--color-primary);font-size:.65rem;font-weight:700">AUD</div>
+              <h3>Audio / Multimodal</h3>
+            </div>
+            <ul>
+              <li>Basics of using pre‑trained speech models for classification or transcription.</li>
+              <li>Converting audio to features (spectrograms, MFCCs) and feeding into CNN/RNN/Transformer.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.6 Contest Skills -->
+      <div id="skills-contest">
+        <div style="display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem">
+          <div class="skill-icon" style="background:color-mix(in oklch,var(--color-gold) 15%,var(--color-surface));color:var(--color-gold);font-size:.65rem;font-weight:700">★</div>
+          <h3 style="font-size:var(--text-lg);font-family:var(--font-display);color:var(--color-text)">1.6 Contest‑Specific Skills</h3>
+        </div>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1rem">What separates the top 5% is not just knowledge but <strong style="color:var(--color-text)">contest execution</strong>.</p>
+        <div class="card">
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem">
+            <li style="display:flex;gap:.625rem;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-gold);font-weight:700;flex-shrink:0">›</span>Ability to quickly read a new problem, build a strong baseline within 1–2 hours, then iterate systematically.</li>
+            <li style="display:flex;gap:.625rem;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-gold);font-weight:700;flex-shrink:0">›</span>Working under IOAI rules: offline except whitelisted docs, limited libraries, no external APIs, fixed GPU, time‑boxed tasks.</li>
+            <li style="display:flex;gap:.625rem;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-gold);font-weight:700;flex-shrink:0">›</span>Strong version control and experiment tracking <em>inside</em> Jupyter (clear notebooks, logging results, commenting decisions).</li>
+            <li style="display:flex;gap:.625rem;font-size:var(--text-sm);color:var(--color-text-muted)"><span style="color:var(--color-gold);font-weight:700;flex-shrink:0">›</span>Familiarity with past IOAI tasks and best solutions; knowing standard tricks and failure modes.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE ROADMAP -->
+    <section>
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <h2 class="section-title">Phase Roadmap (12‑Month Plan)</h2>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1.75rem">This roadmap assumes ~14–18 hours/week. If you can do more, you can compress timelines or go deeper.</p>
+
+      <div class="phase-list">
+
+        <!-- Phase 0 -->
+        <div class="phase-item" id="phase0">
+          <div class="phase-left"><div class="phase-dot ph0">0</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur0">Weeks 1–2</div>
+              <div class="phase-title">Phase 0 – Baseline Assessment</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Goals</div>
+                <ul><li>Measure your current level in math, Python, and ML.</li><li>Choose initial difficulty of resources (intro vs intermediate).</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Tasks (within first 2 weeks)</div>
+                <ul>
+                  <li>Take a short diagnostic: solve one simple Kaggle tabular competition end‑to‑end in a weekend.</li>
+                  <li>Try to skim and understand at least one IOAI 2024 Scientific Round task (ML or NLP). Don't worry if you can't solve it fully yet.</li>
+                  <li>Do a short self‑quiz on math (basic derivatives, matrix multiplication, probability rules).</li>
+                </ul>
+              </div>
+              <div class="deliverable"><strong>Deliverable:</strong> a one‑page self‑assessment listing strengths, weak areas, and target pace (hours/week).</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 1 -->
+        <div class="phase-item" id="phase1">
+          <div class="phase-left"><div class="phase-dot ph1">1</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur1">8 Weeks · Weeks 3–10</div>
+              <div class="phase-title">Phase 1 – Math + Python Foundations</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Objectives</div>
+                <ul><li>Reach comfort with linear algebra, probability, and calculus at the level needed for ML.</li><li>Make Python and core libraries effortless.</li></ul>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.75rem">
+                <div>
+                  <div class="phase-section-title" style="margin-bottom:.5rem">Math Focus</div>
+                  <ul class="phase-section" style="margin:0"><ul>
+                    <li>Weeks 3–4: Linear algebra basics; vectors, matrices, operations, eigenvalues/eigenvectors.</li>
+                    <li>Weeks 5–6: Probability, random variables, expectation/variance, common distributions, Bayes.</li>
+                    <li>Weeks 7–8: Calculus and optimization; gradients and gradient descent updates for simple models.</li>
+                    <li>Weeks 9–10: Mixed review; practice derivations and short proofs.</li>
+                  </ul></ul>
+                </div>
+                <div>
+                  <div class="phase-section-title" style="margin-bottom:.5rem">Programming Focus</div>
+                  <ul class="phase-section" style="margin:0"><ul>
+                    <li>Weeks 3–4: Python refresh (functions, classes, debugging) + basic NumPy.</li>
+                    <li>Weeks 5–6: Pandas for tabular data, EDA; plotting.</li>
+                    <li>Weeks 7–8: Intro scikit‑learn pipelines and metrics on small datasets.</li>
+                    <li>Weeks 9–10: Implement a simple linear regression and logistic regression from scratch in NumPy.</li>
+                  </ul></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="phase-item" id="phase2">
+          <div class="phase-left"><div class="phase-dot ph2">2</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur2">12 Weeks · Weeks 11–22</div>
+              <div class="phase-title">Phase 2 – Core Machine Learning</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Objectives</div>
+                <ul><li>Master classical ML algorithms and evaluation.</li><li>Build robust tabular ML pipelines.</li></ul>
+              </div>
+              <div class="phase-section" style="margin-top:.75rem">
+                <div class="phase-section-title">Weeks 11–14: Supervised learning</div>
+                <ul><li>Study linear/logistic regression, K‑NN, decision trees, random forests.</li><li>Practice on multiple tabular datasets; implement proper train/val/test, cross‑validation, and metric comparison.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 15–18: Advanced models &amp; unsupervised</div>
+                <ul><li>Gradient boosting, SVMs; when they shine vs trees.</li><li>K‑means, PCA and dimensionality reduction; simple clustering tasks.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 19–22: Projects and mini‑contests</div>
+                <ul><li>Take 1–2 small Kaggle tabular competitions; aim for top 25%.</li><li>For each, write a short report: dataset, preprocessing, models tried, final score, and what you learned.</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="phase-item" id="phase3">
+          <div class="phase-left"><div class="phase-dot ph3">3</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur3">16 Weeks · Weeks 23–38</div>
+              <div class="phase-title">Phase 3 – Deep Learning, CV, NLP</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Objectives</div>
+                <ul><li>Be able to build and debug neural networks for images and text.</li><li>Connect theory (gradients, optimization) to real models.</li></ul>
+              </div>
+              <div class="phase-section" style="margin-top:.75rem">
+                <div class="phase-section-title">Weeks 23–26: Deep learning basics</div>
+                <ul><li>MLPs, backprop, mini‑batch training, regularization.</li><li>Implement a small MLP in PyTorch; train on MNIST or similar.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 27–30: Computer vision</div>
+                <ul><li>Learn CNNs (convolution, pooling, batch norm, residuals).</li><li>Fine‑tune a pre‑trained CNN on a custom dataset; experiment with data augmentation.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 31–34: NLP</div>
+                <ul><li>Text classification pipeline with TF‑IDF + logistic regression.</li><li>Introduce pre‑trained encoders (BERT‑style) and fine‑tune on a simple classification task.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 35–38: Multi‑domain practice</div>
+                <ul><li>One mini‑project each in tabular, CV, and NLP.</li><li>Try to re‑implement a simplified IOAI‑style Scientific Round task from public IOAI 2024 tasks or IOAI‑like national tasks.</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="phase-item" id="phase4">
+          <div class="phase-left"><div class="phase-dot ph4">4</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur4">10 Weeks · Weeks 39–48</div>
+              <div class="phase-title">Phase 4 – IOAI‑Specific Practice &amp; Past Tasks</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Objectives</div>
+                <ul><li>Get close to Scientific Committee / top‑team solutions on past IOAI problems.</li><li>Practise under contest‑like constraints.</li></ul>
+              </div>
+              <div class="phase-section" style="margin-top:.75rem">
+                <div class="phase-section-title">Weeks 39–42: Study past tasks</div>
+                <ul><li>Carefully go through IOAI 2024 Scientific Round tasks and official/best solutions (e.g. Team Japan's write‑ups, GitHub repos with solved tasks).</li><li>Re‑implement solutions without copy‑pasting; add your own improvements.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 43–46: Mock Scientific Rounds</div>
+                <ul><li>Every 1–2 weeks, simulate an 8‑hour contest day: Pick 2–3 tasks (one ML, one CV, one NLP) from IOAI‑like sources.</li><li>Work in an offline environment with allowed libraries only.</li><li>Track your score vs baseline.</li></ul>
+              </div>
+              <div class="phase-section">
+                <div class="phase-section-title">Weeks 47–48: Focus on weaknesses</div>
+                <ul><li>Identify common failure modes (e.g. overfitting, mis‑handling imbalance, weak text models).</li><li>Design targeted drills for those weaknesses.</li></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="phase-item" id="phase5">
+          <div class="phase-left"><div class="phase-dot ph5">5</div><div class="phase-line"></div></div>
+          <div class="phase-content">
+            <div class="phase-header">
+              <div class="phase-duration dur5">4+ Weeks · Weeks 49–52+</div>
+              <div class="phase-title">Phase 5 – Final Polish &amp; Team Practice</div>
+            </div>
+            <div class="card">
+              <div class="phase-section">
+                <div class="phase-section-title">Objectives</div>
+                <ul><li>Optimize contest strategy: time management, notebook organization, communication.</li><li>Practise Practical/Team Round skills (creativity, robotics/generative‑AI projects).</li></ul>
+              </div>
+              <div class="phase-section" style="margin-top:.75rem">
+                <div class="phase-section-title">Tasks</div>
+                <ul>
+                  <li>Run at least two full "IOAI simulation weeks": one at‑home style long task, one on‑site style Scientific Round mock, one short Practical/Team challenge.</li>
+                  <li>Practise working with at least one teammate: split tasks, merge code, version control.</li>
+                  <li>Refine your personal checklist: what you do in the first 30 minutes of any new task.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WEEKLY SCHEDULE -->
+    <section id="weekly">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <h2 class="section-title">Weekly Time‑Table Template</h2>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1.25rem">Use this as a default; adjust hours to your capacity. <strong style="color:var(--color-text)">Total: 14–18 hours/week.</strong> Structure: 5–6 study days + 1 rest day.</p>
+      <div class="week-grid">
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 1 — Theory</span><span class="day-hours">3h</span></div>
+          <ul class="day-tasks"><li>1.5 h math (according to current phase).</li><li>1.5 h ML/DL theory reading + notes.</li></ul>
+        </div>
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 2 — Coding</span><span class="day-hours">3h</span></div>
+          <ul class="day-tasks"><li>2 h implementing algorithms or working on current project.</li><li>1 h quick problems (small coding tasks, LeetCode‑style if needed for fluency).</li></ul>
+        </div>
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 3 — EDA + Models</span><span class="day-hours">3h</span></div>
+          <ul class="day-tasks"><li>1 h EDA on a new dataset.</li><li>2 h build/iterate one or two models.</li></ul>
+        </div>
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 4 — Contest Sim</span><span class="day-hours">3h</span></div>
+          <ul class="day-tasks"><li>2–3 h timed session solving a contest‑style task with strict timebox.</li></ul>
+        </div>
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 5 — Review</span><span class="day-hours">2–3h</span></div>
+          <ul class="day-tasks"><li>Summarize what you learned; clean notebooks.</li><li>Flashcards or active recall on formulas and key concepts.</li></ul>
+        </div>
+        <div class="day-card">
+          <div class="day-header"><span class="day-name">Day 6 — Extra / Team</span><span class="day-hours">≤3h</span></div>
+          <ul class="day-tasks"><li>Team practice, IOAI past task re‑runs, or deep dive on a weak area.</li></ul>
+        </div>
+        <div class="day-card day-rest">
+          <div class="day-header"><span class="day-name">Day 7 — Rest</span><span class="day-hours">—</span></div>
+          <ul class="day-tasks"><li>No structured work; at most light reading.</li></ul>
+        </div>
+      </div>
+      <div class="week-note">💡 During later phases, convert one of the theory sessions into a <strong>full mock contest block</strong> (4–5 h) every 2–3 weeks.</div>
+    </section>
+
+    <!-- MILESTONES -->
+    <section id="milestones">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <h2 class="section-title">Phase‑by‑Week Milestone Summary</h2>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1.25rem">A concise summary so you know what each chunk of the year should achieve.</p>
+      <div class="milestone-list">
+        <div class="milestone-row"><div class="milestone-weeks ph0">Wks 1–2</div><div><div class="milestone-label">Phase 0</div><div class="milestone-text">Baseline assessment; first Kaggle tabular mini‑project; first exposure to IOAI task statements.</div></div></div>
+        <div class="milestone-row"><div class="milestone-weeks ph1">Wks 3–10</div><div><div class="milestone-label">Phase 1</div><div class="milestone-text">Solid foundations in linear algebra, probability, and calculus for ML; comfortable with Python + NumPy + Pandas + basic scikit‑learn.</div></div></div>
+        <div class="milestone-row"><div class="milestone-weeks ph2">Wks 11–22</div><div><div class="milestone-label">Phase 2</div><div class="milestone-text">Can build strong classical ML pipelines, evaluate properly, and reach top ~25% in beginner–intermediate tabular competitions.</div></div></div>
+        <div class="milestone-row"><div class="milestone-weeks ph3">Wks 23–38</div><div><div class="milestone-label">Phase 3</div><div class="milestone-text">Able to train/debug MLPs, CNNs, and basic NLP models; at least one project in each of tabular, CV, and NLP.</div></div></div>
+        <div class="milestone-row"><div class="milestone-weeks ph4">Wks 39–48</div><div><div class="milestone-label">Phase 4</div><div class="milestone-text">Have reproduced and improved on several IOAI 2024‑style tasks; confident in offline, restricted environment workflows.</div></div></div>
+        <div class="milestone-row"><div class="milestone-weeks ph5">Wks 49–52+</div><div><div class="milestone-label">Phase 5</div><div class="milestone-text">Multiple full mock contests completed; clear personal strategy; practice on Practical/Team Round‑style creative challenges.</div></div></div>
+      </div>
+      <div style="background:color-mix(in oklch,var(--color-success) 10%,var(--color-surface));border:1px solid color-mix(in oklch,var(--color-success) 25%,transparent);border-radius:var(--radius-md);padding:.75rem 1rem;font-size:var(--text-sm);color:var(--color-text-muted)">✅ If you hit each milestone, you are on track for top‑tier performance.</div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <h2 class="section-title">Measuring Progress and Adjusting</h2>
+      </div>
+      <div class="progress-grid">
+        <div class="progress-card">
+          <h3>5.1 Monthly Self‑Check</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:.75rem">Every 4 weeks, answer:</p>
+          <ul class="check-list">
+            <li>Can I solve <em>new</em> problems of the same type I studied this month?</li>
+            <li>Did I complete at least 1–2 small projects (not just watching videos)?</li>
+            <li>Do I see improvement in accuracy / leaderboard rank / speed of solving?</li>
+          </ul>
+          <div style="margin-top:.75rem;font-size:var(--text-xs);color:var(--color-text-muted);background:var(--color-surface-offset);border-radius:var(--radius-md);padding:.5rem .75rem">If not, slow down and reinforce fundamentals before moving on.</div>
+        </div>
+        <div class="progress-card">
+          <h3>5.2 Contest‑Style Benchmarks</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:.75rem">Use these benchmarks (approximate) to judge readiness:</p>
+          <div class="benchmark-item"><strong>After Phase 2:</strong> you should beat baselines on most beginner tabular tasks and understand why.</div>
+          <div class="benchmark-item"><strong>After Phase 3:</strong> you should be able to train a working CNN and a basic fine‑tuned text classifier with decent accuracy on small datasets.</div>
+          <div class="benchmark-item"><strong>After Phase 4:</strong> you should get reasonably close to official IOAI solutions on at least some 2024 tasks when given the same data and time.</div>
+        </div>
+        <div class="progress-card">
+          <h3>5.3 Focus on Weak Links</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted)">Top 5% performers don't avoid their weak areas. Each month, pick one weak domain (math topic, CV, NLP, coding speed) and design explicit drills for it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOG SECTION -->
+    <section id="log">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <h2 class="section-title">Study Log</h2>
+      </div>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:1.5rem">Track your study hours and progress. Data is stored locally in your session. Use Export/Import to save across devices.</p>
+
+      <div class="hero-stats" style="margin-top:0; margin-bottom:1.5rem">
+        <div class="hero-stat"><div class="hero-stat-val" id="stat-hours">0</div><div class="hero-stat-lbl">Total Hours</div></div>
+        <div class="hero-stat"><div class="hero-stat-val" id="stat-sessions">0</div><div class="hero-stat-lbl">Sessions Logged</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.5rem;">
+         <div class="card-title">Log a Session</div>
+         <form id="logForm" style="display:flex;flex-direction:column;gap:1rem;">
+           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;">
+             <input type="date" id="l-date" class="form-input" required>
+             <select id="l-phase" class="form-input" required>
+               <option value="Phase 0">Phase 0 - Baseline</option>
+               <option value="Phase 1">Phase 1 - Math/Python</option>
+               <option value="Phase 2">Phase 2 - Core ML</option>
+               <option value="Phase 3">Phase 3 - DL/CV/NLP</option>
+               <option value="Phase 4">Phase 4 - IOAI Practice</option>
+               <option value="Phase 5">Phase 5 - Final Polish</option>
+             </select>
+             <input type="number" id="l-hours" class="form-input" step="0.25" min="0.25" placeholder="Hours (e.g. 2.5)" required>
+           </div>
+           <input type="text" id="l-topic" class="form-input" placeholder="Topic / Task (e.g., Matrix Multiplication, YOLOv8)" required>
+           <textarea id="l-notes" class="form-input" placeholder="Notes, breakthroughs, or blockers..." rows="3"></textarea>
+           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+             <button type="submit" class="btn-primary">Save Session</button>
+             <div style="display:flex;gap:0.5rem;">
+               <input type="file" id="importFile" style="display:none" accept=".json" onchange="importLogs(event)">
+               <button type="button" class="btn-secondary" onclick="document.getElementById('importFile').click()">Import JSON</button>
+               <button type="button" class="btn-secondary" onclick="exportLogs()">Export JSON</button>
+             </div>
+           </div>
+         </form>
+      </div>
+
+      <div id="log-container" style="display:flex;flex-direction:column;gap:1rem;">
+        <!-- Log entries injected here -->
+      </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section id="howto">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <h2 class="section-title">How to Use This Plan</h2>
+      </div>
+      <ol class="steps">
+        <li><strong>Print or pin this roadmap</strong> and mark phases/weeks on a calendar.</li>
+        <li><strong>Customize hours/week</strong> based on your school and project load.</li>
+        <li><strong>Log every study session</strong> (topic, time, what you produced).</li>
+        <li><strong>Iterate:</strong> if you find IOAI 2024 tasks still too hard after Phase 3, extend that phase or deepen math.</li>
+      </ol>
+    </section>
+
+    <div class="footer-note">
+      <p>By methodically following these phases, hitting the weekly timetable, and aggressively practising on IOAI‑style tasks and contests, you give yourself a realistic shot at performing in the <strong>top 5%</strong> against global competitors.</p>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+(function(){
+  const toggle=document.querySelector('[data-theme-toggle]');
+  const root=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  root.setAttribute('data-theme',d);
+  const sunSVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const moonSVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  if(d==='dark')toggle.innerHTML=sunSVG;
+  toggle.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    root.setAttribute('data-theme',d);
+    toggle.innerHTML=d==='dark'?sunSVG:moonSVG;
+  });
+})();
+
+function setActive(el){
+  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  if(window.innerWidth<=768)closeSidebar();
+}
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// update active nav on scroll
+const sections=document.querySelectorAll('[id]');
+const navItems=document.querySelectorAll('.nav-item');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navItems.forEach(n=>{
+        n.classList.toggle('active',n.getAttribute('href')==='#'+e.target.id);
+      });
+    }
+  });
+},{threshold:.3,rootMargin:'-60px 0px -40% 0px'});
+sections.forEach(s=>io.observe(s));
+
+/* ── STUDY LOG LOGIC ── */
+let studyLogs = [];
+const logForm = document.getElementById('logForm');
+const logContainer = document.getElementById('log-container');
+const statHours = document.getElementById('stat-hours');
+const statSessions = document.getElementById('stat-sessions');
+
+// Initialize date to today
+document.getElementById('l-date').valueAsDate = new Date();
+
+logForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const newLog = {
+    id: Date.now().toString(),
+    date: document.getElementById('l-date').value,
+    phase: document.getElementById('l-phase').value,
+    hours: parseFloat(document.getElementById('l-hours').value),
+    topic: document.getElementById('l-topic').value,
+    notes: document.getElementById('l-notes').value
+  };
+  studyLogs.unshift(newLog);
+  renderLogs();
+  logForm.reset();
+  document.getElementById('l-date').valueAsDate = new Date();
+});
+
+function renderLogs() {
+  logContainer.innerHTML = '';
+  let totalHours = 0;
+
+  studyLogs.forEach(log => {
+    totalHours += log.hours;
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.innerHTML = `
+      <div class="log-header">
+        <div style="font-weight:600;font-size:var(--text-base);color:var(--color-text)">${log.topic}</div>
+        <button class="log-delete" onclick="deleteLog('${log.id}')">Delete</button>
+      </div>
+      <div class="log-meta">
+        <span class="log-badge">${log.phase}</span>
+        <span class="log-hours-badge">${log.hours}h</span>
+        <span>${log.date}</span>
+      </div>
+      ${log.notes ? `<div style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:0.5rem;">${log.notes}</div>` : ''}
+    `;
+    logContainer.appendChild(entry);
+  });
+
+  statHours.innerText = totalHours.toFixed(1);
+  statSessions.innerText = studyLogs.length;
+}
+
+window.deleteLog = function(id) {
+  studyLogs = studyLogs.filter(l => l.id !== id);
+  renderLogs();
+}
+
+window.exportLogs = function() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(studyLogs, null, 2));
+  const dlNode = document.createElement('a');
+  dlNode.setAttribute("href", dataStr);
+  dlNode.setAttribute("download", "ioai_study_logs.json");
+  document.body.appendChild(dlNode);
+  dlNode.click();
+  dlNode.remove();
+}
+
+window.importLogs = function(event) {
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if(Array.isArray(imported)) {
+         studyLogs = imported;
+         renderLogs();
+      }
+    } catch(err) {
+      alert("Invalid JSON file. Please upload a valid logs file.");
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // Reset input
+}
+</script>
+</body>
+</html>
